@@ -8,7 +8,7 @@ namespace ConsoleCreateEncryptedText
         static void Main(string[] args)
         {
            
-            var text = "I have a big dog. You've got a cat. ";
+            var text = "I have a big dog. You've got a cat. We all love animals!";
 
 
             Console.WriteLine("-- Encrypt Decrypt symmetric --");
