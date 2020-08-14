@@ -30,14 +30,14 @@ namespace ConsoleAsymmetricEncryption
             var asymmetricEncryptDecrypt = new AsymmetricEncryptDecrypt();
 
             var encryptedText = asymmetricEncryptDecrypt.Encrypt(text,
-                asymmetricEncryptDecrypt.CreateCipherPrivateKey(cert2048));
+                asymmetricEncryptDecrypt.CreateCipherPublicKey(cert2048));
 
             Console.WriteLine("");
             Console.WriteLine("-- Encrypted Text --");
             Console.WriteLine(encryptedText);
 
             var decryptedText = asymmetricEncryptDecrypt.Decrypt(encryptedText,
-                asymmetricEncryptDecrypt.CreateCipherPublicKey(cert2048));
+                asymmetricEncryptDecrypt.CreateCipherPrivateKey(cert2048));
 
             Console.WriteLine("-- Decrypted Text --");
             Console.WriteLine(decryptedText);

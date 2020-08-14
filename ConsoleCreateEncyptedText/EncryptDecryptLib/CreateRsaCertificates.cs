@@ -59,7 +59,9 @@ namespace EncryptDecryptLib
                 x509KeyUsageFlags,
                 new RsaConfiguration
                 {
-                    KeySize = keySize
+                    KeySize = keySize, 
+                    RSASignaturePadding = RSASignaturePadding.Pkcs1,
+                    HashAlgorithmName = HashAlgorithmName.SHA256
                 });
 
             return certificate;

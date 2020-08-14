@@ -29,10 +29,9 @@ namespace EncryptDecryptLib
 
         public string Decrypt(string text, RSA cipher)
         {
-
             byte[] data = Convert.FromBase64String(text); 
             byte[] cipherText = cipher.Decrypt(data, RSAEncryptionPadding.Pkcs1);
-            return Convert.ToBase64String(cipherText);
+            return Encoding.UTF8.GetString(cipherText);
         }
     }
 }
