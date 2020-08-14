@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.WebUtilities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
-using System.Text.Encodings.Web;
+
 
 namespace EncryptDecryptLib
 {
@@ -16,8 +15,7 @@ namespace EncryptDecryptLib
             cipher.Padding = PaddingMode.ISO10126;
 
             //Create() makes new key each time, use a consistent key for encrypt/decrypt
-            var stringd = WebEncoders.Base64UrlDecode(keyBase64);
-            cipher.Key = stringd;
+            cipher.Key = Convert.FromBase64String(keyBase64);
 
             return cipher;
         }
@@ -52,9 +50,9 @@ namespace EncryptDecryptLib
             return Encoding.UTF8.GetString(plainText);
         }
 
-        public string GetEncodedRandomString()
+        public string GetEncodedRandomString(int length)
         {
-            var base64 = Convert.ToBase64String(GenerateRandomBytes(100));
+            var base64 = Convert.ToBase64String(GenerateRandomBytes(length));
             return base64;
         }
 

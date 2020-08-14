@@ -1,6 +1,5 @@
 ﻿using EncryptDecryptLib;
 using System;
-using System.Text.Encodings.Web;
 
 namespace ConsoleCreateEncryptedText
 {
@@ -8,13 +7,15 @@ namespace ConsoleCreateEncryptedText
     {
         static void Main(string[] args)
         {
+           
             var text = "I have a big dog.";
+
 
             Console.WriteLine("-- Encrypt Decrypt symmetric --");
             Console.WriteLine("");
 
             var symmetricEncryptDecrypt = new SymmetricEncryptDecrypt();
-            var key = symmetricEncryptDecrypt.GetEncodedRandomString();
+            var key = symmetricEncryptDecrypt.GetEncodedRandomString(32);
             var result = symmetricEncryptDecrypt.Encrypt(text, key);
 
             Console.WriteLine("-- Cipher Key --");
