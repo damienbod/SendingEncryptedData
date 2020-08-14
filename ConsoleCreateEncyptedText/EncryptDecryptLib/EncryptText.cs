@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 
 namespace EncryptDecryptLib
@@ -16,6 +17,18 @@ namespace EncryptDecryptLib
         public string Encrypt(string text)
         {
             return null;
+        }
+
+        private byte[] EncryptRsa(byte[] data, X509Certificate2 rsaCertificate)
+        {
+            return null;
+            //RSAParameters rSAParameters = rsaCertificate.;
+            //using (var rsa = new RSACryptoServiceProvider())
+            //{
+            //    rsa.ImportParameters(rSAParameters);
+            //    return rsa.Encrypt(data, false);
+
+            //}
         }
     }
 }
