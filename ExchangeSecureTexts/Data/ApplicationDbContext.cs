@@ -6,15 +6,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ExchangeSecureTexts.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
-
-        public string PemPrivateKey { get; set; }
-
-        public string PemPublicKey { get; set; }
     }
 }
