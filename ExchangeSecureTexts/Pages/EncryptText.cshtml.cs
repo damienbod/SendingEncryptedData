@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using EncryptDecryptLib;
 using ExchangeSecureTexts.Data;
@@ -70,7 +71,10 @@ namespace ExchangeSecureTexts.Pages
                 Key = Key,
                 IV = IVBase64
             };
-            EncryptedMessage = $"{encryptedText}";
+
+            string jsonString = JsonSerializer.Serialize(encryptedDto);
+
+            EncryptedMessage = $"{jsonString}";
 
             // Redisplay the form.
             return OnGet();
