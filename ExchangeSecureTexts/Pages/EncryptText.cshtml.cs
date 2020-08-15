@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using EncryptDecryptLib;
@@ -16,9 +17,11 @@ namespace ExchangeSecureTexts.Pages
         private readonly ApplicationDbContext _applicationDbContext;
 
         [BindProperty]
+        [Required]
         public string TargetUserEmail { get; set; }
 
         [BindProperty]
+        [Required]
         public string Message { get; set; }
 
         [BindProperty]
@@ -33,13 +36,22 @@ namespace ExchangeSecureTexts.Pages
             _applicationDbContext = applicationDbContext;
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            return Page();
         }
 
-        public void OnPost()
+        public IActionResult OnPost()
         {
+            if (!ModelState.IsValid)
+            {
+                // Something failed. Redisplay the form.
+                return OnGet();
+            }
+            EncryptedMessage = $"TODO Encrypt {Message}";
 
+            // Redisplay the form.
+            return OnGet();
 
         }
     }
