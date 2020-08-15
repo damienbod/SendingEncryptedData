@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleSymmetricEncryption"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8CC91FD8-D810-4BC0-A04C-3D73A9B833B1}"
 	ProjectSection(SolutionItems) = preProject
-		..\README.md = ..\README.md
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EncryptDecryptLib", "EncryptDecryptLib\EncryptDecryptLib.csproj", "{5DF0A8A6-88B9-4F34-9024-5B0D8B044D34}"

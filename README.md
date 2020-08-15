@@ -1,5 +1,13 @@
 # Sending Encrypted Data
 
+## Migrations Razor page APP
+```
+Add-Migration "init_sts" -c ApplicationDbContext  
+```
+
+```
+Update-Database -c ApplicationDbContext
+```
 
 # Links
 
