@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using CertificateManager;
+using EncryptDecryptLib;
 using ExchangeSecureTexts.Data;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -24,17 +27,23 @@ namespace ExchangeSecureTexts.Areas.Identity.Pages.Account
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly CreateCertificates _createCertificates;
+        private readonly ImportExportCertificate _importExportCertificate;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            CreateCertificates createCertificates,
+            ImportExportCertificate importExportCertificate)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _createCertificates = createCertificates;
+            _importExportCertificate = importExportCertificate;
         }
 
         [BindProperty]
@@ -75,7 +84,17 @@ namespace ExchangeSecureTexts.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email };
+                var identityRsaCert2048 = CreateRsaCertificates.CreateRsaCertificate(_createCertificates, 2048);
+                var publicKeyPem = _importExportCertificate.PemExportPublicKeyCertificate(identityRsaCert2048);
+                var privateKeyPem = _importExportCertificate.PemExportRsaPrivateKey(identityRsaCert2048);
+
+                var user = new ApplicationUser { 
+                    UserName = Input.Email, 
+                    Email = Input.Email,
+                    PemPrivateKey = privateKeyPem,
+                    PemPublicKey = publicKeyPem
+                };
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

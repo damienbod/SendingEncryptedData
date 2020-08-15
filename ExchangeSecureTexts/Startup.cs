@@ -32,6 +32,9 @@ namespace ExchangeSecureTexts
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddCertificateManager();
+
             services.AddRazorPages();
         }
 
