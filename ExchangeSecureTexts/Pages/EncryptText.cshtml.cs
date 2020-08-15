@@ -2,13 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text.Json;
 using System.Threading.Tasks;
+using CertificateManager;
 using EncryptDecryptLib;
 using ExchangeSecureTexts.Data;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace ExchangeSecureTexts.Pages
 {
@@ -17,6 +21,7 @@ namespace ExchangeSecureTexts.Pages
         private readonly SymmetricEncryptDecrypt _symmetricEncryptDecrypt;
         private readonly AsymmetricEncryptDecrypt _asymmetricEncryptDecrypt;
         private readonly ApplicationDbContext _applicationDbContext;
+        private readonly ImportExportCertificate _importExportCertificate;
 
         [BindProperty]
         [Required]
@@ -33,11 +38,13 @@ namespace ExchangeSecureTexts.Pages
 
         public EncryptTextModel(SymmetricEncryptDecrypt symmetricEncryptDecrypt,
             AsymmetricEncryptDecrypt asymmetricEncryptDecrypt,
-            ApplicationDbContext applicationDbContext)
+            ApplicationDbContext applicationDbContext,
+            ImportExportCertificate importExportCertificate)
         {
             _symmetricEncryptDecrypt = symmetricEncryptDecrypt;
             _asymmetricEncryptDecrypt = asymmetricEncryptDecrypt;
             _applicationDbContext = applicationDbContext;
+            _importExportCertificate = importExportCertificate;
         }
 
         public IActionResult OnGet()
@@ -65,11 +72,19 @@ namespace ExchangeSecureTexts.Pages
 
             var encryptedText = _symmetricEncryptDecrypt.Encrypt(Message, IVBase64, Key);
 
+            var targetUserPublicCertificate = GetCertificateWithPublicKeyForIdentity(TargetUserEmail);
+
+            var encryptedKey = _asymmetricEncryptDecrypt.Encrypt(Key,
+                _asymmetricEncryptDecrypt.CreateCipherPublicKey(targetUserPublicCertificate));
+
+            var encryptedIV = _asymmetricEncryptDecrypt.Encrypt(IVBase64,
+              _asymmetricEncryptDecrypt.CreateCipherPublicKey(targetUserPublicCertificate));
+
             var encryptedDto = new EncryptedDto
             {
                 EncryptedText = encryptedText,
-                Key = Key,
-                IV = IVBase64
+                Key = encryptedKey,
+                IV = encryptedIV
             };
 
             string jsonString = JsonSerializer.Serialize(encryptedDto);
@@ -79,6 +94,13 @@ namespace ExchangeSecureTexts.Pages
             // Redisplay the form.
             return OnGet();
 
+        }
+
+        private X509Certificate2 GetCertificateWithPublicKeyForIdentity(string email)
+        {
+            var user = _applicationDbContext.Users.First(user => user.Email == email);
+            var cert = _importExportCertificate.PemImportCertificate(user.PemPublicKey);
+            return cert;
         }
     }
 }
