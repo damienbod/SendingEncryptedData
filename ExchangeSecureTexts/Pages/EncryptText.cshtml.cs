@@ -7,6 +7,7 @@ using EncryptDecryptLib;
 using ExchangeSecureTexts.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ExchangeSecureTexts.Pages
 {
@@ -27,6 +28,8 @@ namespace ExchangeSecureTexts.Pages
         [BindProperty]
         public string EncryptedMessage { get; set; }
 
+        public List<SelectListItem> Users { get; set; }
+
         public EncryptTextModel(SymmetricEncryptDecrypt symmetricEncryptDecrypt,
             AsymmetricEncryptDecrypt asymmetricEncryptDecrypt,
             ApplicationDbContext applicationDbContext)
@@ -38,6 +41,14 @@ namespace ExchangeSecureTexts.Pages
 
         public IActionResult OnGet()
         {
+            // not good if you have a lot of users
+            Users = _applicationDbContext.Users.Select(a =>
+                                 new SelectListItem
+                                 {
+                                     Value = a.Email.ToString(),
+                                     Text = a.Email
+                                 }).ToList();
+
             return Page();
         }
 
@@ -48,7 +59,18 @@ namespace ExchangeSecureTexts.Pages
                 // Something failed. Redisplay the form.
                 return OnGet();
             }
-            EncryptedMessage = $"TODO Encrypt {Message}";
+
+            var (Key, IVBase64) = _symmetricEncryptDecrypt.InitSession();
+
+            var encryptedText = _symmetricEncryptDecrypt.Encrypt(Message, IVBase64, Key);
+
+            var encryptedDto = new EncryptedDto
+            {
+                EncryptedText = encryptedText,
+                Key = Key,
+                IV = IVBase64
+            };
+            EncryptedMessage = $"{encryptedText}";
 
             // Redisplay the form.
             return OnGet();

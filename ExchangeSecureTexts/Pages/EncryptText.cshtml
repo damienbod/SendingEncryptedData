@@ -7,10 +7,12 @@
 <form asp-page="EncryptTextModel" method="post">
 
     <div class="form-group">
-        <label for="TargetUserEmail">User Email address:</label>
-        <input type="email" class="form-control" placeholder="Enter email"
+        <label for="TargetUserEmail">Encrypted Text intended for Identity with Email address </label>
+        @*<input type="email" class="form-control" placeholder="Enter email"
                id="TargetUserEmail" name="TargetUserEmail" value="@Model.TargetUserEmail">
-        <span asp-validation-for="TargetUserEmail" style="color:red"></span>
+        <span asp-validation-for="TargetUserEmail" style="color:red"></span>*@
+
+        <select name="TargetUserEmail" asp-items="Model.Users" class="form-control"></select>
     </div>
 
     <div class="form-group">
