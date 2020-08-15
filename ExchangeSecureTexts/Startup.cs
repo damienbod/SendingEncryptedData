@@ -12,6 +12,7 @@ using ExchangeSecureTexts.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using EncryptDecryptLib;
 
 namespace ExchangeSecureTexts
 {
@@ -34,6 +35,8 @@ namespace ExchangeSecureTexts
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddCertificateManager();
+            services.AddTransient<SymmetricEncryptDecrypt>();
+            services.AddTransient<AsymmetricEncryptDecrypt>();
 
             services.AddRazorPages();
         }
