@@ -8,17 +8,20 @@
 
     <div class="form-group">
         <label for="TargetUserEmail">User Email address:</label>
-        <input type="email" class="form-control" placeholder="Enter email" id="TargetUserEmail" name="TargetUserEmail">
+        <input type="email" class="form-control" placeholder="Enter email" 
+               id="TargetUserEmail" name="TargetUserEmail" value="@Model.TargetUserEmail">
     </div>
 
     <div class="form-group">
         <label for="Message">Message:</label>
-        <textarea class="form-control" rows="5" id="Message" name="Message"></textarea>
+        <textarea class="form-control" rows="5" id="Message" name="Message">@Model.Message</textarea>
     </div>
 
     <button type="submit" class="btn btn-primary" style="width:100%">Submit</button>
 
 </form>
 
-<br /><br />
-<textarea class="form-control" rows="5" id="EncryptedMessage" name="EncryptedMessage" readonly></textarea>
+
+<br />
+<br />
+<textarea class="form-control" rows="5" id="EncryptedMessage" name="EncryptedMessage" readonly>@Model.EncryptedMessage</textarea>
