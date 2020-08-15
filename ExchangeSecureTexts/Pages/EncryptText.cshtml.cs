@@ -15,6 +15,15 @@ namespace ExchangeSecureTexts.Pages
         private readonly AsymmetricEncryptDecrypt _asymmetricEncryptDecrypt;
         private readonly ApplicationDbContext _applicationDbContext;
 
+        [BindProperty]
+        public string TargetUserEmail { get; set; }
+
+        [BindProperty]
+        public string Message { get; set; }
+
+        [BindProperty]
+        public string EncryptedMessage { get; set; }
+
         public EncryptTextModel(SymmetricEncryptDecrypt symmetricEncryptDecrypt,
             AsymmetricEncryptDecrypt asymmetricEncryptDecrypt,
             ApplicationDbContext applicationDbContext)
@@ -26,6 +35,12 @@ namespace ExchangeSecureTexts.Pages
 
         public void OnGet()
         {
+        }
+
+        public void OnPost()
+        {
+
+
         }
     }
 }
