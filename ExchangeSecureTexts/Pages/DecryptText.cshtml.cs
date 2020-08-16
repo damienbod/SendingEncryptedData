@@ -52,11 +52,11 @@ namespace ExchangeSecureTexts.Pages
 
             var encryptedDto = JsonSerializer.Deserialize<EncryptedDto>(EncryptedMessage);
 
-            var key = _asymmetricEncryptDecrypt.Encrypt(encryptedDto.Key,
-                _asymmetricEncryptDecrypt.CreateCipherPublicKey(cert));
+            var key = _asymmetricEncryptDecrypt.Decrypt(encryptedDto.Key,
+                _asymmetricEncryptDecrypt.CreateCipherPrivateKey(cert));
 
-            var IV = _asymmetricEncryptDecrypt.Encrypt(encryptedDto.IV,
-              _asymmetricEncryptDecrypt.CreateCipherPublicKey(cert));
+            var IV = _asymmetricEncryptDecrypt.Decrypt(encryptedDto.IV,
+              _asymmetricEncryptDecrypt.CreateCipherPrivateKey(cert));
 
             var text = _symmetricEncryptDecrypt.Decrypt(encryptedDto.EncryptedText, IV, key);
 
