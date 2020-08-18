@@ -53,10 +53,10 @@ namespace ExchangeSecureTexts.Pages
             var encryptedDto = JsonSerializer.Deserialize<EncryptedDto>(EncryptedMessage);
 
             var key = _asymmetricEncryptDecrypt.Decrypt(encryptedDto.Key,
-                _asymmetricEncryptDecrypt.CreateCipherPrivateKey(cert));
+               Utils.CreateRsaPrivateKey(cert));
 
             var IV = _asymmetricEncryptDecrypt.Decrypt(encryptedDto.IV,
-              _asymmetricEncryptDecrypt.CreateCipherPrivateKey(cert));
+               Utils.CreateRsaPrivateKey(cert));
 
             var text = _symmetricEncryptDecrypt.Decrypt(encryptedDto.EncryptedText, IV, key);
 

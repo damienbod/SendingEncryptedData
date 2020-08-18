@@ -75,10 +75,10 @@ namespace ExchangeSecureTexts.Pages
             var targetUserPublicCertificate = GetCertificateWithPublicKeyForIdentity(TargetUserEmail);
 
             var encryptedKey = _asymmetricEncryptDecrypt.Encrypt(Key,
-                _asymmetricEncryptDecrypt.CreateCipherPublicKey(targetUserPublicCertificate));
+                Utils.CreateRsaPublicKey(targetUserPublicCertificate));
 
             var encryptedIV = _asymmetricEncryptDecrypt.Encrypt(IVBase64,
-              _asymmetricEncryptDecrypt.CreateCipherPublicKey(targetUserPublicCertificate));
+                Utils.CreateRsaPublicKey(targetUserPublicCertificate));
 
             var encryptedDto = new EncryptedDto
             {
