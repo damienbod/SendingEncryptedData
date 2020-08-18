@@ -8,6 +8,7 @@ namespace EncryptDecryptLib
 {
     public class AsymmetricEncryptDecrypt
     {
+        // Encrypt with RSA using public key
         public string Encrypt(string text, RSA rsa)
         {
             byte[] data = Encoding.UTF8.GetBytes(text);
@@ -15,6 +16,7 @@ namespace EncryptDecryptLib
             return Convert.ToBase64String(cipherText);
         }
 
+        // Decrypt with RSA using private key
         public string Decrypt(string text, RSA rsa)
         {
             byte[] data = Convert.FromBase64String(text); 
