@@ -2,7 +2,6 @@
 using EncryptDecryptLib;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Security.Cryptography;
 
 namespace ConsoleAsymmetricEncryption
 {
