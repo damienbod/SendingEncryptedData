@@ -15,7 +15,7 @@ namespace ConsoleCreateEncryptedText
             Console.WriteLine("");
 
             var symmetricEncryptDecrypt = new SymmetricEncryptDecrypt();
-            var (Key, IVBase64) = symmetricEncryptDecrypt.InitSession();
+            var (Key, IVBase64) = symmetricEncryptDecrypt.InitSymmetricEncryptionKeyIV();
 
             var encryptedText = symmetricEncryptDecrypt.Encrypt(text, IVBase64, Key);
 

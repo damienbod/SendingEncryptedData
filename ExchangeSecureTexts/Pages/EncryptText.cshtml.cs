@@ -68,7 +68,7 @@ namespace ExchangeSecureTexts.Pages
                 return OnGet();
             }
 
-            var (Key, IVBase64) = _symmetricEncryptDecrypt.InitSession();
+            var (Key, IVBase64) = _symmetricEncryptDecrypt.InitSymmetricEncryptionKeyIV();
 
             var encryptedText = _symmetricEncryptDecrypt.Encrypt(Message, IVBase64, Key);
 

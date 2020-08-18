@@ -8,7 +8,7 @@ namespace EncryptDecryptLib
     public class SymmetricEncryptDecrypt
     {
 
-        public (string Key, string IVBase64) InitSession()
+        public (string Key, string IVBase64) InitSymmetricEncryptionKeyIV()
         {
             var key = GetEncodedRandomString(32); // 256
             Aes cipher = CreateCipher(key);
@@ -16,10 +16,17 @@ namespace EncryptDecryptLib
             return (key, IVBase64);
         }
 
-        public string Encrypt(string text, string IVBase64, string cipherKeyBase64)
+        /// <summary>
+        /// Encrypt using AES
+        /// </summary>
+        /// <param name="text">any text</param>
+        /// <param name="IV">Base64 IV string/param>
+        /// <param name="key">Base64 key</param>
+        /// <returns>Returns an encrypted string</returns>
+        public string Encrypt(string text, string IV, string key)
         {
-            Aes cipher = CreateCipher(cipherKeyBase64);
-            cipher.IV = Convert.FromBase64String(IVBase64);
+            Aes cipher = CreateCipher(key);
+            cipher.IV = Convert.FromBase64String(IV);
 
             ICryptoTransform cryptTransform = cipher.CreateEncryptor();
             byte[] plaintext = Encoding.UTF8.GetBytes(text);
@@ -28,16 +35,23 @@ namespace EncryptDecryptLib
             return Convert.ToBase64String(cipherText);
         }
 
-        public string Decrypt(string cipherTextBase64, string IVBase64, string cipherKeyBase64)
+        /// <summary>
+        /// Decrypt using AES
+        /// </summary>
+        /// <param name="text">Base64 string for an AES encryption</param>
+        /// <param name="IV">Base64 IV string/param>
+        /// <param name="key">Base64 key</param>
+        /// <returns>Returns a string</returns>
+        public string Decrypt(string encryptedText, string IV, string key)
         {
-            Aes cipher = CreateCipher(cipherKeyBase64);
-            cipher.IV = Convert.FromBase64String(IVBase64);
+            Aes cipher = CreateCipher(key);
+            cipher.IV = Convert.FromBase64String(IV);
 
             ICryptoTransform cryptTransform = cipher.CreateDecryptor();
-            byte[] cipherText = Convert.FromBase64String(cipherTextBase64);
-            byte[] plainText = cryptTransform.TransformFinalBlock(cipherText, 0, cipherText.Length);
+            byte[] encryptedBytes = Convert.FromBase64String(encryptedText);
+            byte[] plainBytes = cryptTransform.TransformFinalBlock(encryptedBytes, 0, encryptedBytes.Length);
 
-            return Encoding.UTF8.GetString(plainText);
+            return Encoding.UTF8.GetString(plainBytes);
         }
 
         private string GetEncodedRandomString(int length)
@@ -46,6 +60,11 @@ namespace EncryptDecryptLib
             return base64;
         }
 
+        /// <summary>
+        /// Create an AES Cipher using a base64 key
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns>AES</returns>
         private Aes CreateCipher(string keyBase64)
         {
             // Default values: Keysize 256, Mode CBC, Padding PKC27
