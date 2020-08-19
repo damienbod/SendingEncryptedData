@@ -1,5 +1,11 @@
 # Sending Encrypted Data
 
+## Blogs 
+
+### Symmetric and Asymmetric Encryption in .NET Core
+
+https://damienbod.com/2020/08/19/symmetric-and-asymmetric-encryption-in-net-core/
+
 ## Migrations Razor page APP
 ```
 Add-Migration "init_sts" -c ApplicationDbContext  
