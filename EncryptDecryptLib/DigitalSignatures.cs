@@ -17,7 +17,7 @@ namespace EncryptDecryptLib
         // Verify with RSA using public key
         public bool Verify(string text, string signatureBase64, RSA rsa)
         {
-            byte[] data = Convert.FromBase64String(text);
+            byte[] data = Encoding.UTF8.GetBytes(text);
             byte[] signature = Convert.FromBase64String(signatureBase64);
             bool isValid = rsa.VerifyData(data, signature, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
             return isValid;
