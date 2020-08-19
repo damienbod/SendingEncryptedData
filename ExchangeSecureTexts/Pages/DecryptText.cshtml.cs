@@ -16,6 +16,7 @@ namespace ExchangeSecureTexts.Pages
         private readonly AsymmetricEncryptDecrypt _asymmetricEncryptDecrypt;
         private readonly ApplicationDbContext _applicationDbContext;
         private readonly ImportExportCertificate _importExportCertificate;
+        private readonly DigitalSignatures _digitalSignatures;
 
         [BindProperty]
         public string Message { get; set; }
@@ -27,12 +28,14 @@ namespace ExchangeSecureTexts.Pages
         public DecryptTextModel(SymmetricEncryptDecrypt symmetricEncryptDecrypt,
             AsymmetricEncryptDecrypt asymmetricEncryptDecrypt,
             ApplicationDbContext applicationDbContext,
-            ImportExportCertificate importExportCertificate)
+            ImportExportCertificate importExportCertificate,
+            DigitalSignatures digitalSignatures)
         {
             _symmetricEncryptDecrypt = symmetricEncryptDecrypt;
             _asymmetricEncryptDecrypt = asymmetricEncryptDecrypt;
             _applicationDbContext = applicationDbContext;
             _importExportCertificate = importExportCertificate;
+            _digitalSignatures = digitalSignatures;
         }
 
         public IActionResult OnGet()
@@ -51,6 +54,17 @@ namespace ExchangeSecureTexts.Pages
             var cert = GetCertificateWithPrivateKeyForIdentity();
 
             var encryptedDto = JsonSerializer.Deserialize<EncryptedDto>(EncryptedMessage);
+
+            var sender = _asymmetricEncryptDecrypt.Decrypt(encryptedDto.Sender,
+               Utils.CreateRsaPrivateKey(cert));
+
+            var senderCert = GetCertificateWithPublicKeyForIdentity(sender);
+
+            var verified = _digitalSignatures.Verify(encryptedDto.EncryptedText, 
+                encryptedDto.DigitalSignature,
+                Utils.CreateRsaPublicKey(senderCert));
+
+            if(!verified) return BadRequest("NOT verified");
 
             var key = _asymmetricEncryptDecrypt.Decrypt(encryptedDto.Key,
                Utils.CreateRsaPrivateKey(cert));
@@ -77,6 +91,13 @@ namespace ExchangeSecureTexts.Pages
             var cert = _importExportCertificate.CreateCertificateWithPrivateKey(
                 certWithPublicKey, privateKey);
 
+            return cert;
+        }
+
+        private X509Certificate2 GetCertificateWithPublicKeyForIdentity(string email)
+        {
+            var user = _applicationDbContext.Users.First(user => user.Email == email);
+            var cert = _importExportCertificate.PemImportCertificate(user.PemPublicKey);
             return cert;
         }
     }

@@ -82,7 +82,7 @@ namespace ExchangeSecureTexts.Pages
             var encryptedSender = _asymmetricEncryptDecrypt.Encrypt(User.Identity.Name,
                 Utils.CreateRsaPublicKey(targetUserPublicCertificate));
 
-            var certLoggedInUser = GetCertificateForLoggedInIdentity();
+            var certLoggedInUser = GetCertificateWithPrivateKeyForIdentity();
 
             var signature = _digitalSignatures.Sign(encryptedText,
                 Utils.CreateRsaPrivateKey(certLoggedInUser));
@@ -112,10 +112,16 @@ namespace ExchangeSecureTexts.Pages
             return cert;
         }
 
-        private X509Certificate2 GetCertificateForLoggedInIdentity()
+        private X509Certificate2 GetCertificateWithPrivateKeyForIdentity()
         {
             var user = _applicationDbContext.Users.First(user => user.Email == User.Identity.Name);
-            var cert = _importExportCertificate.PemImportCertificate(user.PemPublicKey);
+
+            var certWithPublicKey = _importExportCertificate.PemImportCertificate(user.PemPublicKey);
+            var privateKey = _importExportCertificate.PemImportPrivateKey(user.PemPrivateKey);
+
+            var cert = _importExportCertificate.CreateCertificateWithPrivateKey(
+                certWithPublicKey, privateKey);
+
             return cert;
         }
     }
