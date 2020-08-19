@@ -67,7 +67,7 @@ namespace EncryptDecryptLib
         /// <returns>AES</returns>
         private Aes CreateCipher(string keyBase64)
         {
-            // Default values: Keysize 256, Mode CBC, Padding PKC27
+            // Default values: Keysize 256, Padding PKC27
             Aes cipher = Aes.Create();
             cipher.Mode = CipherMode.CBC;
             cipher.Padding = PaddingMode.ISO10126;
