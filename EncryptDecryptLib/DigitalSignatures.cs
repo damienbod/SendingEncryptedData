@@ -4,7 +4,7 @@ using System.Text;
 
 namespace EncryptDecryptLib
 {
-    public class SignVerfiy
+    public class DigitalSignatures
     {
         // Sign with RSA using private key
         public string Sign(string text, RSA rsa)

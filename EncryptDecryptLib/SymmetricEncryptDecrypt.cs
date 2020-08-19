@@ -69,7 +69,7 @@ namespace EncryptDecryptLib
         {
             // Default values: Keysize 256, Mode CBC, Padding PKC27
             Aes cipher = Aes.Create();
-
+            cipher.Mode = CipherMode.CBC;
             cipher.Padding = PaddingMode.ISO10126;
             cipher.Key = Convert.FromBase64String(keyBase64);
 
@@ -78,9 +78,8 @@ namespace EncryptDecryptLib
 
         private byte[] GenerateRandomBytes(int length)
         {
-            using var randonNumberGen = new RNGCryptoServiceProvider();
             var byteArray = new byte[length];
-            randonNumberGen.GetBytes(byteArray);
+            RandomNumberGenerator.Fill(byteArray);
             return byteArray;
         }
     }
