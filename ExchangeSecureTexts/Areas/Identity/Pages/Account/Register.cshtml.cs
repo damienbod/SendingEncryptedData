@@ -88,8 +88,9 @@ namespace ExchangeSecureTexts.Areas.Identity.Pages.Account
                 var publicKeyPem = _importExportCertificate.PemExportPublicKeyCertificate(identityRsaCert3072);
                 var privateKeyPem = _importExportCertificate.PemExportRsaPrivateKey(identityRsaCert3072);
 
-                var user = new ApplicationUser { 
-                    UserName = Input.Email, 
+                var user = new ApplicationUser
+                {
+                    UserName = Input.Email,
                     Email = Input.Email,
                     PemPrivateKey = privateKeyPem,
                     PemPublicKey = publicKeyPem
