@@ -84,12 +84,13 @@ namespace ExchangeSecureTexts.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var identityRsaCert2048 = CreateRsaCertificates.CreateRsaCertificate(_createCertificates, 2048);
-                var publicKeyPem = _importExportCertificate.PemExportPublicKeyCertificate(identityRsaCert2048);
-                var privateKeyPem = _importExportCertificate.PemExportRsaPrivateKey(identityRsaCert2048);
+                var identityRsaCert3072 = CreateRsaCertificates.CreateRsaCertificate(_createCertificates, 3072);
+                var publicKeyPem = _importExportCertificate.PemExportPublicKeyCertificate(identityRsaCert3072);
+                var privateKeyPem = _importExportCertificate.PemExportRsaPrivateKey(identityRsaCert3072);
 
-                var user = new ApplicationUser { 
-                    UserName = Input.Email, 
+                var user = new ApplicationUser
+                {
+                    UserName = Input.Email,
                     Email = Input.Email,
                     PemPrivateKey = privateKeyPem,
                     PemPublicKey = publicKeyPem
