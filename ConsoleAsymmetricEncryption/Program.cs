@@ -16,7 +16,7 @@ namespace ConsoleAsymmetricEncryption
 
             var cc = serviceProvider.GetService<CreateCertificates>();
 
-            var cert2048 = CreateRsaCertificates.CreateRsaCertificate(cc, 2048);
+            var cert3072 = CreateRsaCertificates.CreateRsaCertificate(cc, 3072);
 
             var text = "I have a big dog. You've got a cat. We all love animals!";
 
@@ -26,14 +26,14 @@ namespace ConsoleAsymmetricEncryption
             var asymmetricEncryptDecrypt = new AsymmetricEncryptDecrypt();
 
             var encryptedText = asymmetricEncryptDecrypt.Encrypt(text,
-                Utils.CreateRsaPublicKey(cert2048));
+                Utils.CreateRsaPublicKey(cert3072));
 
             Console.WriteLine("");
             Console.WriteLine("-- Encrypted Text --");
             Console.WriteLine(encryptedText);
 
             var decryptedText = asymmetricEncryptDecrypt.Decrypt(encryptedText,
-               Utils.CreateRsaPrivateKey(cert2048));
+               Utils.CreateRsaPrivateKey(cert3072));
 
             Console.WriteLine("-- Decrypted Text --");
             Console.WriteLine(decryptedText);
