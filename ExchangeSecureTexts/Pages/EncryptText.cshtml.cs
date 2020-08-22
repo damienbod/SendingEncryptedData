@@ -102,7 +102,6 @@ namespace ExchangeSecureTexts.Pages
 
             // Redisplay the form.
             return OnGet();
-
         }
 
         private X509Certificate2 GetCertificateWithPublicKeyForIdentity(string email)
