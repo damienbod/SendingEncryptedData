@@ -6,6 +6,10 @@
 
 https://damienbod.com/2020/08/19/symmetric-and-asymmetric-encryption-in-net-core/
 
+### Encrypting texts for an Identity in ASP.NET Core Razor Pages using AES and RSA
+
+https://damienbod.com/2020/08/22/encrypting-texts-for-an-identity-in-asp-net-core-razor-pages-using-aes-and-rsa/
+
 ## Migrations Razor page APP
 ```
 Add-Migration "init_sts" -c ApplicationDbContext  
