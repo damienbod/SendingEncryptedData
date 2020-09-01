@@ -2,13 +2,12 @@
 
 ## Blogs 
 
-### Symmetric and Asymmetric Encryption in .NET Core
+<ul>	
+	<li><a href="https://damienbod.com/2020/08/19/symmetric-and-asymmetric-encryption-in-net-core/">Symmetric and Asymmetric Encryption in .NET Core</a></li>
+	<li><a href="https://damienbod.com/2020/08/22/encrypting-texts-for-an-identity-in-asp-net-core-razor-pages-using-aes-and-rsa/">Encrypting texts for an Identity in ASP.NET Core Razor Pages using AES and RSA</a></li>
+	<li><a href="https://damienbod.com/2020/09/01/using-digital-signatures-to-check-integrity-of-cipher-texts-in-asp-net-core-razor-pages/">Using Digital Signatures to check integrity of cipher texts in ASP.NET Core Razor Pages</a></li>
 
-https://damienbod.com/2020/08/19/symmetric-and-asymmetric-encryption-in-net-core/
-
-### Encrypting texts for an Identity in ASP.NET Core Razor Pages using AES and RSA
-
-https://damienbod.com/2020/08/22/encrypting-texts-for-an-identity-in-asp-net-core-razor-pages-using-aes-and-rsa/
+</ul>
 
 ## Migrations Razor page APP
 ```
