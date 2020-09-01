@@ -37,6 +37,8 @@ namespace ExchangeSecureTexts
             services.AddCertificateManager();
             services.AddTransient<SymmetricEncryptDecrypt>();
             services.AddTransient<AsymmetricEncryptDecrypt>();
+            services.AddTransient<DigitalSignatures>();
+            
 
             services.AddRazorPages();
         }
