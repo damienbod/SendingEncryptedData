@@ -8,7 +8,8 @@
 
     <div class="form-group">
         <label for="TargetUserEmail">Encrypted Text intended for Identity with Email address </label>
-        <select name="TargetUserEmail" selected="TargetUserEmail" asp-items="Model.Users" class="form-control"></select>
+        @Html.DropDownList("TargetUserEmail", Model.Users,
+                    new { @class = "form-control" })
     </div>
 
     <div class="form-group">
