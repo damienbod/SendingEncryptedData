@@ -7,6 +7,7 @@ using EncryptDecryptLib;
 using ExchangeSecureTexts.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Configuration;
 
 namespace ExchangeSecureTexts.Pages
 {
@@ -17,6 +18,7 @@ namespace ExchangeSecureTexts.Pages
         private readonly ApplicationDbContext _applicationDbContext;
         private readonly ImportExportCertificate _importExportCertificate;
         private readonly DigitalSignatures _digitalSignatures;
+        private readonly IConfiguration _configuration;
 
         [BindProperty]
         public string Message { get; set; }
@@ -29,13 +31,15 @@ namespace ExchangeSecureTexts.Pages
             AsymmetricEncryptDecrypt asymmetricEncryptDecrypt,
             ApplicationDbContext applicationDbContext,
             ImportExportCertificate importExportCertificate,
-            DigitalSignatures digitalSignatures)
+            DigitalSignatures digitalSignatures,
+            IConfiguration configuration)
         {
             _symmetricEncryptDecrypt = symmetricEncryptDecrypt;
             _asymmetricEncryptDecrypt = asymmetricEncryptDecrypt;
             _applicationDbContext = applicationDbContext;
             _importExportCertificate = importExportCertificate;
             _digitalSignatures = digitalSignatures;
+            _configuration = configuration;
         }
 
         public IActionResult OnGet()
@@ -85,12 +89,8 @@ namespace ExchangeSecureTexts.Pages
         {
             var user = _applicationDbContext.Users.First(user => user.Email == User.Identity.Name);
 
-            var certWithPublicKey = _importExportCertificate.PemImportCertificate(user.PemPublicKey);
-            var privateKey = _importExportCertificate.PemImportPrivateKey(user.PemPrivateKey);
-
-            var cert = _importExportCertificate.CreateCertificateWithPrivateKey(
-                certWithPublicKey, privateKey);
-
+            var cert = _importExportCertificate.PemImportCertificate(user.PemPrivateKey,
+                _configuration["PemPasswordExportImport"]);
             return cert;
         }
 
