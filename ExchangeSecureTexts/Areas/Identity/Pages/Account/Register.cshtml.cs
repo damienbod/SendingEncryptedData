@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 namespace ExchangeSecureTexts.Areas.Identity.Pages.Account
@@ -29,6 +30,7 @@ namespace ExchangeSecureTexts.Areas.Identity.Pages.Account
         private readonly IEmailSender _emailSender;
         private readonly CreateCertificates _createCertificates;
         private readonly ImportExportCertificate _importExportCertificate;
+        private readonly IConfiguration _configuration;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
@@ -36,7 +38,8 @@ namespace ExchangeSecureTexts.Areas.Identity.Pages.Account
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
             CreateCertificates createCertificates,
-            ImportExportCertificate importExportCertificate)
+            ImportExportCertificate importExportCertificate,
+            IConfiguration configuration)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -44,6 +47,7 @@ namespace ExchangeSecureTexts.Areas.Identity.Pages.Account
             _emailSender = emailSender;
             _createCertificates = createCertificates;
             _importExportCertificate = importExportCertificate;
+            _configuration = configuration;
         }
 
         [BindProperty]
@@ -86,7 +90,8 @@ namespace ExchangeSecureTexts.Areas.Identity.Pages.Account
             {
                 var identityRsaCert3072 = CreateRsaCertificates.CreateRsaCertificate(_createCertificates, 3072);
                 var publicKeyPem = _importExportCertificate.PemExportPublicKeyCertificate(identityRsaCert3072);
-                var privateKeyPem = _importExportCertificate.PemExportRsaPrivateKey(identityRsaCert3072);
+                var privateKeyPem = _importExportCertificate.PemExportPfxFullCertificate(identityRsaCert3072, 
+                    _configuration["PemPasswordExportImport"]);
 
                 var user = new ApplicationUser
                 {
