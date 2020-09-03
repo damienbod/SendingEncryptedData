@@ -2,3 +2,4 @@
 **/obj
 **/bin
 /ExchangeSecureTexts/ExchangeSecureTexts.csproj.user
+/ExchangeSecureTexts/node_modules
