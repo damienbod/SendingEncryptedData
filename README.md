@@ -9,6 +9,10 @@
 
 </ul>
 
+## History
+
+2020-12-26 Updated to .NET 5
+
 ## Migrations Razor page APP
 ```
 Add-Migration "init_sts" -c ApplicationDbContext  
