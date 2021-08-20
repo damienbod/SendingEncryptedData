@@ -1,5 +1,7 @@
 # Sending Encrypted Data
 
+[![.NET](https://github.com/damienbod/SendingEncryptedData/actions/workflows/dotnet.yml/badge.svg)](https://github.com/damienbod/SendingEncryptedData/actions/workflows/dotnet.yml)
+
 ## Blogs 
 
 <ul>	
@@ -11,6 +13,8 @@
 
 ## History
 
+2021-08-20 Updated packages, added build
+
 2021-04-26 Updated packages
 
 2021-02-28 Updated nuget packages
@@ -19,11 +23,11 @@
 
 ## Migrations Razor page APP
 ```
-Add-Migration "init_sts" -c ApplicationDbContext  
+Add-Migration "init_sts" 
 ```
 
 ```
-Update-Database -c ApplicationDbContext
+Update-Database
 ```
 
 # Links
