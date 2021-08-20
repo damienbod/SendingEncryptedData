@@ -1,5 +1,7 @@
 # Sending Encrypted Data
 
+[![.NET](https://github.com/damienbod/SendingEncryptedData/actions/workflows/dotnet.yml/badge.svg)](https://github.com/damienbod/SendingEncryptedData/actions/workflows/dotnet.yml)
+
 ## Blogs 
 
 <ul>	
@@ -10,6 +12,8 @@
 </ul>
 
 ## History
+
+2021-08-20 Updated packages, added build
 
 2021-04-26 Updated packages
 

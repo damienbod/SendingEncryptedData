@@ -7,6 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleSymmetricEncryption"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8CC91FD8-D810-4BC0-A04C-3D73A9B833B1}"
 	ProjectSection(SolutionItems) = preProject
+		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -14,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EncryptDecryptLib", "Encryp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleAsymmetricEncryption", "ConsoleAsymmetricEncryption\ConsoleAsymmetricEncryption.csproj", "{D489AB83-16C6-4490-AEAD-C6E74D5C2921}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExchangeSecureTexts", "ExchangeSecureTexts\ExchangeSecureTexts.csproj", "{7AA74F66-6EE3-4463-A003-14240AE9B61B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExchangeSecureTexts", "ExchangeSecureTexts\ExchangeSecureTexts.csproj", "{7AA74F66-6EE3-4463-A003-14240AE9B61B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
