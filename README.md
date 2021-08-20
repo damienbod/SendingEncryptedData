@@ -23,11 +23,11 @@
 
 ## Migrations Razor page APP
 ```
-Add-Migration "init_sts" -c ApplicationDbContext  
+Add-Migration "init_sts" 
 ```
 
 ```
-Update-Database -c ApplicationDbContext
+Update-Database
 ```
 
 # Links
