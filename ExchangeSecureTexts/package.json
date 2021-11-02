@@ -11,6 +11,6 @@
     "popper.js": "^1.16.1"
   },
   "dependencies": {
-    "jquery-ui": "^1.12.1"
+    "jquery-ui": "^1.13.0"
   }
 }
