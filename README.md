@@ -13,6 +13,8 @@
 
 ## History
 
+2021-11-02 Updated to .NET 6
+
 2021-08-20 Updated packages, added build
 
 2021-04-26 Updated packages
