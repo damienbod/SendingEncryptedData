@@ -1,44 +1,43 @@
 ﻿using CertificateManager;
 using EncryptDecryptLib;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 
-namespace ConsoleAsymmetricEncryption
+namespace ConsoleAsymmetricEncryption;
+
+class Program
 {
-    class Program
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Hello World!");
-            var serviceProvider = new ServiceCollection()
-                .AddCertificateManager()
-                .BuildServiceProvider();
+        Console.WriteLine("Hello World!");
+        var serviceProvider = new ServiceCollection()
+            .AddCertificateManager()
+            .BuildServiceProvider();
 
-            var cc = serviceProvider.GetService<CreateCertificates>();
+        var cc = serviceProvider.GetService<CreateCertificates>();
 
-            var cert3072 = CreateRsaCertificates.CreateRsaCertificate(cc, 3072);
+        if (cc == null)
+            throw new Exception("no service");
 
-            var text = "I have a big dog. You've got a cat. We all love animals!";
+        var cert3072 = CreateRsaCertificates.CreateRsaCertificate(cc, 3072);
 
-            Console.WriteLine("-- Encrypt Decrypt asymmetric --");
-            Console.WriteLine("");
+        var text = "I have a big dog. You've got a cat. We all love animals!";
 
-            var asymmetricEncryptDecrypt = new AsymmetricEncryptDecrypt();
+        Console.WriteLine("-- Encrypt Decrypt asymmetric --");
+        Console.WriteLine("");
 
-            var encryptedText = asymmetricEncryptDecrypt.Encrypt(text,
-                Utils.CreateRsaPublicKey(cert3072));
+        var asymmetricEncryptDecrypt = new AsymmetricEncryptDecrypt();
 
-            Console.WriteLine("");
-            Console.WriteLine("-- Encrypted Text --");
-            Console.WriteLine(encryptedText);
+        var encryptedText = asymmetricEncryptDecrypt.Encrypt(text,
+            Utils.CreateRsaPublicKey(cert3072));
 
-            var decryptedText = asymmetricEncryptDecrypt.Decrypt(encryptedText,
-               Utils.CreateRsaPrivateKey(cert3072));
+        Console.WriteLine("");
+        Console.WriteLine("-- Encrypted Text --");
+        Console.WriteLine(encryptedText);
 
-            Console.WriteLine("-- Decrypted Text --");
-            Console.WriteLine(decryptedText);
-        }
+        var decryptedText = asymmetricEncryptDecrypt.Decrypt(encryptedText,
+            Utils.CreateRsaPrivateKey(cert3072));
+
+        Console.WriteLine("-- Decrypted Text --");
+        Console.WriteLine(decryptedText);
     }
 }
-
-
