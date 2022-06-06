@@ -13,6 +13,8 @@
 
 ## History
 
+2022-06-06 Updated packages, move to nullables and ImplicitUsings
+
 2022-01-08 Updated packages
 
 2021-11-02 Updated to .NET 6
@@ -27,7 +29,7 @@
 
 ## Migrations Razor page APP
 ```
-Add-Migration "init_sts" 
+Add-Migration "init_identity_db" 
 ```
 
 ```
