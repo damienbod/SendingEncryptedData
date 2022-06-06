@@ -59,6 +59,9 @@ namespace ExchangeSecureTexts.Pages
 
             var encryptedDto = JsonSerializer.Deserialize<EncryptedDto>(EncryptedMessage);
 
+            if (encryptedDto == null)
+                throw new ArgumentNullException("encryptedDto is null");
+
             var sender = _asymmetricEncryptDecrypt.Decrypt(encryptedDto.Sender,
                Utils.CreateRsaPrivateKey(cert));
 
@@ -87,11 +90,17 @@ namespace ExchangeSecureTexts.Pages
 
         private X509Certificate2 GetCertificateWithPrivateKeyForIdentity()
         {
-            var user = _applicationDbContext.Users.First(user => user.Email == User.Identity.Name);
+            if(User?.Identity?.Name != null)
+            {
+                var user = _applicationDbContext.Users.First(user => user.Email == User.Identity.Name);
 
-            var cert = _importExportCertificate.PemImportCertificate(user.PemPrivateKey,
-                _configuration["PemPasswordExportImport"]);
-            return cert;
+                var cert = _importExportCertificate.PemImportCertificate(user.PemPrivateKey,
+                    _configuration["PemPasswordExportImport"]);
+
+                return cert;
+            }
+
+            throw new ArgumentNullException("no user!");
         }
 
         private X509Certificate2 GetCertificateWithPublicKeyForIdentity(string email)

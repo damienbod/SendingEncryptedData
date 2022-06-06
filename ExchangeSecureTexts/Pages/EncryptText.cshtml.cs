@@ -119,12 +119,18 @@ namespace ExchangeSecureTexts.Pages
 
         private X509Certificate2 GetCertificateWithPrivateKeyForIdentity()
         {
-            var user = _applicationDbContext.Users.First(user => user.Email == User.Identity.Name);
+            if (User?.Identity?.Name != null)
+            {
+                var user = _applicationDbContext.Users.First(user => user.Email == User.Identity.Name);
 
-            var cert = _importExportCertificate.PemImportCertificate(user.PemPrivateKey,
-                _configuration["PemPasswordExportImport"]);
+                var cert = _importExportCertificate.PemImportCertificate(user.PemPrivateKey,
+                    _configuration["PemPasswordExportImport"]);
 
-            return cert;
+                return cert;
+
+            }
+
+            throw new ArgumentNullException("no user!");
         }
     }
 }
