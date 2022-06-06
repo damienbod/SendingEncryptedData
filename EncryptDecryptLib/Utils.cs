@@ -7,13 +7,21 @@ public static class Utils
 {
     public static RSA CreateRsaPublicKey(X509Certificate2 certificate)
     {
-        RSA publicKeyProvider = certificate.GetRSAPublicKey();
+        var publicKeyProvider = certificate.GetRSAPublicKey();
+
+        if (publicKeyProvider == null)
+            throw new ArgumentException("RSA public key is null");
+
         return publicKeyProvider;
     }
 
     public static RSA CreateRsaPrivateKey(X509Certificate2 certificate)
     {
-        RSA privateKeyProvider = certificate.GetRSAPrivateKey();
+        var privateKeyProvider = certificate.GetRSAPrivateKey();
+
+        if (privateKeyProvider == null)
+            throw new ArgumentException("RSA private key is null");
+
         return privateKeyProvider;
     }
 }

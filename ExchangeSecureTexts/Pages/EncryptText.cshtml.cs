@@ -82,6 +82,9 @@ namespace ExchangeSecureTexts.Pages
             var encryptedIV = _asymmetricEncryptDecrypt.Encrypt(IVBase64,
                 Utils.CreateRsaPublicKey(targetUserPublicCertificate));
 
+            if (User?.Identity?.Name == null)
+                throw new ArgumentNullException("no user");
+
             var encryptedSender = _asymmetricEncryptDecrypt.Encrypt(User.Identity.Name,
                 Utils.CreateRsaPublicKey(targetUserPublicCertificate));
 
