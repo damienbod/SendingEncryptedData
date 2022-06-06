@@ -1,11 +1,10 @@
-﻿namespace EncryptDecryptLib
+﻿namespace EncryptDecryptLib;
+
+public class EncryptedDto
 {
-    public class EncryptedDto
-    {
-        public string EncryptedText { get; set; }
-        public string IV { get; set; }
-        public string Key { get; set; }
-        public string DigitalSignature { get; set; }
-        public string Sender { get; set; }
-    }
+    public string EncryptedText { get; set; } = string.Empty;
+    public string IV { get; set; } = string.Empty;
+    public string Key { get; set; } = string.Empty;
+    public string DigitalSignature { get; set; } = string.Empty;
+    public string Sender { get; set; } = string.Empty;
 }
