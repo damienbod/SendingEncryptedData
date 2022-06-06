@@ -127,7 +127,6 @@ namespace ExchangeSecureTexts.Pages
                     _configuration["PemPasswordExportImport"]);
 
                 return cert;
-
             }
 
             throw new ArgumentNullException("no user!");
