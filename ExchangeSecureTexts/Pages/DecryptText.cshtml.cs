@@ -21,11 +21,11 @@ namespace ExchangeSecureTexts.Pages
         private readonly IConfiguration _configuration;
 
         [BindProperty]
-        public string Message { get; set; }
+        public string? Message { get; set; }
 
         [BindProperty]
         [Required]
-        public string EncryptedMessage { get; set; }
+        public string EncryptedMessage { get; set; } = string.Empty;
 
         public DecryptTextModel(SymmetricEncryptDecrypt symmetricEncryptDecrypt,
             AsymmetricEncryptDecrypt asymmetricEncryptDecrypt,

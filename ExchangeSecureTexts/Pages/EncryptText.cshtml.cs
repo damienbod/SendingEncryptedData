@@ -9,7 +9,6 @@ using ExchangeSecureTexts.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.Extensions.Configuration;
 
 namespace ExchangeSecureTexts.Pages
 {
@@ -24,16 +23,16 @@ namespace ExchangeSecureTexts.Pages
 
         [BindProperty]
         [Required]
-        public string TargetUserEmail { get; set; }
+        public string TargetUserEmail { get; set; } = string.Empty;
 
         [BindProperty]
         [Required]
-        public string Message { get; set; }
+        public string Message { get; set; } = string.Empty;
 
         [BindProperty]
-        public string EncryptedMessage { get; set; }
+        public string? EncryptedMessage { get; set; }
 
-        public List<SelectListItem> Users { get; set; }
+        public List<SelectListItem> Users { get; set; } = new List<SelectListItem>();
 
         public EncryptTextModel(SymmetricEncryptDecrypt symmetricEncryptDecrypt,
             AsymmetricEncryptDecrypt asymmetricEncryptDecrypt,
