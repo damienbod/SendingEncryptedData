@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.Json;
 using CertificateManager;
@@ -7,7 +6,6 @@ using EncryptDecryptLib;
 using ExchangeSecureTexts.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Configuration;
 
 namespace ExchangeSecureTexts.Pages
 {

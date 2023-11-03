@@ -4,30 +4,22 @@
 
 ## Blogs 
 
-<ul>	
-	<li><a href="https://damienbod.com/2020/08/19/symmetric-and-asymmetric-encryption-in-net-core/">Symmetric and Asymmetric Encryption in .NET Core</a></li>
-	<li><a href="https://damienbod.com/2020/08/22/encrypting-texts-for-an-identity-in-asp-net-core-razor-pages-using-aes-and-rsa/">Encrypting texts for an Identity in ASP.NET Core Razor Pages using AES and RSA</a></li>
-	<li><a href="https://damienbod.com/2020/09/01/using-digital-signatures-to-check-integrity-of-cipher-texts-in-asp-net-core-razor-pages/">Using Digital Signatures to check integrity of cipher texts in ASP.NET Core Razor Pages</a></li>
+- [Symmetric and Asymmetric Encryption in .NET Core](https://damienbod.com/2020/08/19/symmetric-and-asymmetric-encryption-in-net-core/)
+- [Encrypting texts for an Identity in ASP.NET Core Razor Pages using AES and RSA](https://damienbod.com/2020/08/22/encrypting-texts-for-an-identity-in-asp-net-core-razor-pages-using-aes-and-rsa/)
+- [Using Digital Signatures to check integrity of cipher texts in ASP.NET Core Razor Pages](https://damienbod.com/2020/09/01/using-digital-signatures-to-check-integrity-of-cipher-texts-in-asp-net-core-razor-pages/)
 
 </ul>
 
 ## History
 
-2023-04-01 Updated .NET 7
-
-2022-06-06 Updated packages, move to nullables and ImplicitUsings
-
-2022-01-08 Updated packages
-
-2021-11-02 Updated to .NET 6
-
-2021-08-20 Updated packages, added build
-
-2021-04-26 Updated packages
-
-2021-02-28 Updated nuget packages
-
-2020-12-26 Updated to .NET 5
+- 2023-04-01 Updated .NET 7
+- 2022-06-06 Updated packages, move to nullables and ImplicitUsings
+- 2022-01-08 Updated packages
+- 2021-11-02 Updated to .NET 6
+- 2021-08-20 Updated packages, added build
+- 2021-04-26 Updated packages
+- 2021-02-28 Updated nuget packages
+- 2020-12-26 Updated to .NET 5
 
 ## Migrations Razor page APP
 ```
