@@ -13,10 +13,7 @@ class Program
             .AddCertificateManager()
             .BuildServiceProvider();
 
-        var cc = serviceProvider.GetService<CreateCertificates>();
-
-        if (cc == null)
-            throw new Exception("no service");
+        var cc = serviceProvider.GetService<CreateCertificates>() ?? throw new Exception("no service");
 
         var cert3072 = CreateRsaCertificates.CreateRsaCertificate(cc, 3072);
 

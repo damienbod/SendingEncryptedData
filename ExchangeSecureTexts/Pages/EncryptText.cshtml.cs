@@ -55,7 +55,7 @@ namespace ExchangeSecureTexts.Pages
             Users = _applicationDbContext.Users.Select(a =>
                                  new SelectListItem
                                  {
-                                     Value = a.Email.ToString(),
+                                     Value = a.Email!.ToString(),
                                      Text = a.Email
                                  }).ToList();
 
