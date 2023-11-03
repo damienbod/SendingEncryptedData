@@ -8,8 +8,6 @@
 - [Encrypting texts for an Identity in ASP.NET Core Razor Pages using AES and RSA](https://damienbod.com/2020/08/22/encrypting-texts-for-an-identity-in-asp-net-core-razor-pages-using-aes-and-rsa/)
 - [Using Digital Signatures to check integrity of cipher texts in ASP.NET Core Razor Pages](https://damienbod.com/2020/09/01/using-digital-signatures-to-check-integrity-of-cipher-texts-in-asp-net-core-razor-pages/)
 
-</ul>
-
 ## History
 
 - 2023-11-03 Updated packages
@@ -23,6 +21,7 @@
 - 2020-12-26 Updated to .NET 5
 
 ## Migrations Razor page APP
+
 ```
 Add-Migration "init_identity_db" 
 ```
@@ -31,7 +30,7 @@ Add-Migration "init_identity_db"
 Update-Database
 ```
 
-# Links
+## Links
 
 https://docs.microsoft.com/en-us/dotnet/standard/security/encrypting-data
 
