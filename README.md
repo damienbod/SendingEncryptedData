@@ -10,6 +10,7 @@
 
 ## History
 
+- 2023-11-25 Updated .NET 8
 - 2023-11-03 Updated packages
 - 2023-04-01 Updated .NET 7
 - 2022-06-06 Updated packages, move to nullables and ImplicitUsings
