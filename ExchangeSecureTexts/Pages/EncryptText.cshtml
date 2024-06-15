@@ -4,17 +4,21 @@
 <form asp-page="EncryptTextModel" method="post">
 
     <div class="form-group">
-        <label for="TargetUserEmail">Encrypted Text intended for Identity with Email address </label>
-        @Html.DropDownList("TargetUserEmail", Model.Users, new { @class = "form-control" })
+        <label class ="form-label" for="TargetUserEmail">Encrypted Text intended for Identity with Email address </label>
+        @Html.DropDownList("TargetUserEmail", Model.Users, new { @class = "form-control form-select" })
     </div>
 
     <div class="form-group">
-        <label for="Message">Message:</label>
+        <label class="form-label" for="Message">Message:</label>
         <textarea class="form-control" rows="5" id="Message" name="Message">@Model.Message</textarea>
         <span asp-validation-for="Message" style="color:red"></span>
     </div>
 
-    <button type="submit" class="btn btn-primary" style="width:100%">Encrypt</button>
+    <div class="field">
+        <div class="control">
+            <button type="submit" class="w-100 btn btn-lg btn-primary">Encrypt</button>
+        </div>
+    </div>
 
 </form>
 

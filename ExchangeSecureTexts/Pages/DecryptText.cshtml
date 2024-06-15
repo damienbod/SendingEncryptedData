@@ -4,12 +4,16 @@
 <form asp-page="DecryptTextModel" method="post">
 
     <div class="form-group">
-        <label for="Message">EncryptedMessage:</label>
+        <label class="form-label" for="Message">EncryptedMessage:</label>
         <textarea class="form-control" rows="5" id="Message" name="EncryptedMessage">@Model.EncryptedMessage</textarea>
         <span asp-validation-for="EncryptedMessage" style="color:red"></span>
     </div>
 
-    <button type="submit" class="btn btn-primary" style="width:100%">Decrypt</button>
+    <div class="field">
+        <div class="control">
+            <button type="submit" class="w-100 btn btn-lg btn-primary">Decrypt</button>
+        </div>
+    </div>
 
 </form>
 
