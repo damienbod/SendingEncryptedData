@@ -1,15 +1,11 @@
 ﻿@page
 @model ExchangeSecureTexts.Pages.EncryptTextModel
-@{
-}
-
 
 <form asp-page="EncryptTextModel" method="post">
 
     <div class="form-group">
         <label for="TargetUserEmail">Encrypted Text intended for Identity with Email address </label>
-        @Html.DropDownList("TargetUserEmail", Model.Users,
-                    new { @class = "form-control" })
+        @Html.DropDownList("TargetUserEmail", Model.Users, new { @class = "form-control" })
     </div>
 
     <div class="form-group">
