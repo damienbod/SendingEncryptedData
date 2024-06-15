@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Text;
-using System.Text.Encodings.Web;
-using CertificateManager;
+﻿using CertificateManager;
 using EncryptDecryptLib;
 using ExchangeSecureTexts.Data;
 using Microsoft.AspNetCore.Authentication;
@@ -11,6 +8,9 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using System.ComponentModel.DataAnnotations;
+using System.Text;
+using System.Text.Encodings.Web;
 
 namespace ExchangeSecureTexts.Areas.Identity.Pages.Account;
 
@@ -84,7 +84,7 @@ public class RegisterModel : PageModel
         {
             var identityRsaCert3072 = CreateRsaCertificates.CreateRsaCertificate(_createCertificates, 3072);
             var publicKeyPem = _importExportCertificate.PemExportPublicKeyCertificate(identityRsaCert3072);
-            var privateKeyPem = _importExportCertificate.PemExportPfxFullCertificate(identityRsaCert3072, 
+            var privateKeyPem = _importExportCertificate.PemExportPfxFullCertificate(identityRsaCert3072,
                 _configuration["PemPasswordExportImport"]);
 
             var user = new ApplicationUser

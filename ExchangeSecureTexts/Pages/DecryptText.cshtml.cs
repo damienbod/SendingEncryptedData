@@ -1,11 +1,11 @@
-using System.ComponentModel.DataAnnotations;
-using System.Security.Cryptography.X509Certificates;
-using System.Text.Json;
 using CertificateManager;
 using EncryptDecryptLib;
 using ExchangeSecureTexts.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.ComponentModel.DataAnnotations;
+using System.Security.Cryptography.X509Certificates;
+using System.Text.Json;
 
 namespace ExchangeSecureTexts.Pages
 {
@@ -65,11 +65,11 @@ namespace ExchangeSecureTexts.Pages
 
             var senderCert = GetCertificateWithPublicKeyForIdentity(sender);
 
-            var verified = _digitalSignatures.Verify(encryptedDto.EncryptedText, 
+            var verified = _digitalSignatures.Verify(encryptedDto.EncryptedText,
                 encryptedDto.DigitalSignature,
                 Utils.CreateRsaPublicKey(senderCert));
 
-            if(!verified) return BadRequest("NOT verified");
+            if (!verified) return BadRequest("NOT verified");
 
             var key = _asymmetricEncryptDecrypt.Decrypt(encryptedDto.Key,
                Utils.CreateRsaPrivateKey(cert));
@@ -87,7 +87,7 @@ namespace ExchangeSecureTexts.Pages
 
         private X509Certificate2 GetCertificateWithPrivateKeyForIdentity()
         {
-            if(User?.Identity?.Name != null)
+            if (User?.Identity?.Name != null)
             {
                 var user = _applicationDbContext.Users.First(user => user.Email == User.Identity.Name);
 

@@ -16,7 +16,7 @@ public class AsymmetricEncryptDecrypt
     // Decrypt with RSA using private key
     public string Decrypt(string text, RSA rsa)
     {
-        byte[] data = Convert.FromBase64String(text); 
+        byte[] data = Convert.FromBase64String(text);
         byte[] cipherText = rsa.Decrypt(data, RSAEncryptionPadding.Pkcs1);
         return Encoding.UTF8.GetString(cipherText);
     }

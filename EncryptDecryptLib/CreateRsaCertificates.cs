@@ -40,7 +40,7 @@ public class CreateRsaCertificates
             //OidLookup.ServerAuthentication,
             OidLookup.CodeSigning,
             OidLookup.SecureEmail,
-            OidLookup.TimeStamping 
+            OidLookup.TimeStamping
         };
 
         var certificate = createCertificates.NewRsaSelfSignedCertificate(
@@ -56,7 +56,7 @@ public class CreateRsaCertificates
             x509KeyUsageFlags,
             new RsaConfiguration
             {
-                KeySize = keySize, 
+                KeySize = keySize,
                 RSASignaturePadding = RSASignaturePadding.Pkcs1,
                 HashAlgorithmName = HashAlgorithmName.SHA256
             });
