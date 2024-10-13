@@ -11,7 +11,6 @@ builder.WebHost.ConfigureKestrel(serverOptions =>
 
 var services = builder.Services;
 var configuration = builder.Configuration;
-var env = builder.Environment;
 
 services.AddDbContext<ApplicationDbContext>(options =>
            options.UseSqlServer(
@@ -36,7 +35,7 @@ services.AddRazorPages();
 
 var app = builder.Build();
 
-if (env.IsDevelopment())
+if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
 }
