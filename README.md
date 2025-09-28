@@ -24,7 +24,7 @@
 - 2021-11-02 Updated to .NET 6
 - 2021-08-20 Updated packages, added build
 - 2021-04-26 Updated packages
-- 2021-02-28 Updated nuget packages
+- 2021-02-28 Updated Nuget packages
 - 2020-12-26 Updated to .NET 5
 
 ## Migrations Razor page APP
