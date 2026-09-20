@@ -10,6 +10,7 @@
 
 ## History
 
+- 2026-09-20 Update packages
 - 2026-06-07 Update packages
 - 2025-11-25 .NET 10
 - 2025-09-28 Updated packages
